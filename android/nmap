@@ -1,0 +1,55 @@
+
+=============================
+sudo nmap -sn 192.168.1.0/24
+=============================
+Replace 192.168.1.0/24 with your network's subnet. The -sn flag tells nmap to only discover hosts and not port scan them.
+
+Slow and Steady Port Scan:
+Android devices can be picky about scan speed, and a fast scan might cause them to drop packets or fail to respond. 
+To ensure you get results without overwhelming the device, use a slow timing template and limit the packet rate.
+
+===================================================
+sudo nmap -sS -p- --max-rate 100 -T2 <IP_OF_PHONE>
+===================================================
+-sS: Performs a TCP SYN scan (stealth scan), which is nmap's default for root users and less likely to be logged than a full TCP connect scan.
+-p-: Scans all 65,535 TCP ports. Android devices typically have few open ports, but this is thorough.
+--max-rate 100: Limits the scan to sending no more than 100 packets per second, which is crucial 
+for discovering sensitive devices like some Android phones.
+-T2: Uses the "Polite" timing template, which further slows down the scan to reduce network load and avoid detection.
+Service and Version Detection:
+If you find open ports, you'll want to know what services are running on them.
+
+==================================================
+sudo nmap -sV -sC --max-rate 50 -T2 <IP_OF_PHONE>
+==================================================
+-sV: Probes open ports to determine service and version information^9.
+-sC: Runs default, safe scripts to gather more information (like HTTP titles or SSL details). 
+This is a good balance of useful information without being overly intrusive.
+What You Should Be Looking For
+Open Ports: On a standard Android phone, you should expect very few, if any, open ports. Common findings might be:
+Port 5555: Sometimes open for Android Debug Bridge (ADB), though this is usually disabled by default.
+Ports associated with apps: Some apps, like file sharing apps (e.g., certain FTP or media server apps), may open ports on the local networK.
+Chromecast/mirroring services: These can open ports for local discovery and streaming.
+Operating System Fingerprinting: Use the -O flag to try and identify the OS. Nmap may correctly identify it as Android or a Linux-based system.
+
+=============================================
+sudo nmap -O --max-rate 50 -T2 <IP_OF_PHONE>
+=============================================
+MAC Address: During the initial host discovery (-sn scan), note the MAC address and its vendor (e.g., Samsung Electronics).
+This confirms you're scanning the right device1.
+What to Avoid to Not Upset the Router
+Your main goal is to be a "good neighbor" on your own network. Aggressive scanning can trigger router-level security features,
+cause instability, or just slow everything down for everyone.
+
+Avoid Aggressive Timing: Do not use -T4 (Aggressive) or -T5 (Insane). These templates send packets as fast as possible 
+and can easily overwhelm a consumer-grade router like a Verizon Fios unit, leading to slowdowns or temporary disconnections for other devices.
+Avoid Massive Scans of the Entire Subnet: Running a full port scan (-p-) with service detection (-sV) on every single IP
+in your subnet (192.168.1.0/24) is a bad idea. It generates a huge amount of traffic in a short time. Always scan a specific target IP once you've identified it.
+Avoid Intrusive NSE Scripts: Nmap's Scripting Engine (NSE) is powerful, but some scripts are disruptive. 
+Avoid using script categories like intrusive, dos (Denial of Service), exploit, or brute unless you know exactly what you're doing
+and are prepared for potential consequences. Stick to the default or safe categories, which are used by the -sC flag.
+Limit Your Scan Rate: As shown in the commands above, using --max-rate is your best tool for controlling the impact on the network. Start low (e.g., 100 packets/sec)
+and only increase it if you must.
+Scan During Off-Peak Hours: If you must run a more intensive scan, do it when no one else is actively using the network for streaming, gaming, or video calls.
+By following these slower, more targeted commands, you can successfully gather information about
+your Android phone without causing problems for your network or your router.
