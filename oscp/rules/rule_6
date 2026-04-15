@@ -1,0 +1,6 @@
+Don't rely on just TCP, run UDP too:
+nmap -sU -p 53,161,137 $target -v or nmap -sV -sU -p- --open $target -v
+remember, udp is connection less, it doesn't make the three way 
+handshake it will take awhile
+really target port 161
+nmap -sU -p 161 --script=snmp-info,snmp-interfaces,snmp-processes $target

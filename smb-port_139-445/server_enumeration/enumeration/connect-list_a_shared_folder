@@ -1,0 +1,19 @@
+
+# Connect using smbclient
+smbclient --no-pass //<IP>/<Folder>
+
+smbclient -U 'username[%passwd]' -L [--pw-nt-hash] //<IP> 
+# If you omit the pwd, it will be prompted. With --pw-nt-hash, 
+# the pwd provided is the NT hash
+# Use --no-pass -c 'recurse;ls'  to list recursively with smbclient
+
+
+#List with smbmap, without folder it list everything
+smbmap [-u "username" -p "password"] -R [Folder] -H <IP> [-P <PORT>] 
+# Recursive list
+
+smbmap [-u "username" -p "password"] -r [Folder] -H <IP> [-P <PORT>] 
+# Non-Recursive list
+
+smbmap -u "username" -p "<NT>:<LM>" [-r/-R] [Folder] -H <IP> [-P <PORT>] 
+# Pass-the-Hash

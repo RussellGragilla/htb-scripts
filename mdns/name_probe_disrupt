@@ -1,0 +1,8 @@
+# mDNS name probing interference (DoS / name squatting)
+# During the probing phase, a host checks name uniqueness. Responding with spoofed conflicts forces it to pick new names or fail. 
+# This can delay or prevent service registration and discovery.
+
+# Example with Pholus:
+
+# Block new devices from taking names by auto-faking responses
+sudo python3 pholus3.py <iface> -afre -stimeout 1000

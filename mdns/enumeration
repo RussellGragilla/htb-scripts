@@ -1,0 +1,28 @@
+# nmap target scan (direct mDNS on a host):
+nmap -sU -p 5353 --script=dns-service-discovery <target>
+
+# nmap broadcast discovery (listen to the segment and enumerate all DNS-SD types/instances):
+sudo nmap --script=broadcast-dns-service-discovery
+
+# avahi-browse (Linux):
+# List service types
+avahi-browse -bt _services._dns-sd._udp
+# Browse all services and resolve to host/port
+avahi-browse -art
+
+# Apple dns-sd (macOS):
+# Browse all HTTP services
+dns-sd -B _http._tcp
+# Enumerate service types
+dns-sd -B _services._dns-sd._udp
+# Resolve a specific instance to SRV/TXT
+dns-sd -L "My Printer" _ipp._tcp local
+
+# Packet capture with tshark:
+# Live capture
+sudo tshark -i <iface> -f "udp port 5353" -Y mdns
+# Only DNS-SD service list queries
+sudo tshark -i <iface> -f "udp port 5353" -Y "dns.qry.name == \"_services._dns-sd._udp.local\""
+
+# Tip: Some browsers/WebRTC use ephemeral mDNS hostnames to mask local IPs. If you see random-UUID.local
+#  candidates on the wire, resolve them with mDNS to pivot to local IPs.

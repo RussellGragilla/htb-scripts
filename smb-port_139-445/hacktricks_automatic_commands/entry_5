@@ -1,0 +1,3 @@
+  Name: Hydra Brute Force
+  Description: Need User
+  Command: hydra -t 1 -V -f -l {Username} -P {Big_Passwordlist} {IP} smb

@@ -1,0 +1,3 @@
+
+mount -t cifs //x.x.x.x/share /mnt/share
+mount -t cifs -o "username=user,password=password" //x.x.x.x/share /mnt/share

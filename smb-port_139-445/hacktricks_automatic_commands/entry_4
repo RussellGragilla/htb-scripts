@@ -1,0 +1,3 @@
+  Name: Nmap Smb Scan 2
+  Description: SMB Vuln Scan With Nmap (Less Specific)
+  Command: nmap --script 'smb-vuln*' -Pn -p 139,445 {IP}

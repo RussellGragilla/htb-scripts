@@ -1,0 +1,23 @@
+PowerShell
+
+# Retrieves the SMB shares on the locale computer.
+Get-SmbShare
+Get-WmiObject -Class Win32_Share
+# Retrieves the SMB shares on a remote computer.
+get-smbshare -CimSession "<computer name or session object>"
+# Retrieves the connections established from the local SMB client to the SMB servers.
+Get-SmbConnection
+CMD console
+
+# List shares on the local computer
+net share
+# List shares on a remote computer (including hidden ones)
+net view \\<ip> /all
+MMC Snap-in (graphical)
+
+# Shared Folders: Shared Folders > Shares
+fsmgmt.msc
+# Computer Management: Computer Management > System Tools > Shared Folders > Shares
+compmgmt.msc
+
+explorer.exe (graphical), enter \\<ip>\ to see the available non-hidden shares.

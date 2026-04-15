@@ -1,0 +1,5 @@
+Web Proxy Auto-Discovery Protocol (WPAD)
+
+- WPAD allows browsers to discover proxy settings automatically.
+- Discovery is facilitated via DHCP, DNS, or fallback to LLMNR and NBT-NS if DNS fails.
+- Responder can automate WPAD attacks, directing clients to malicious WPAD servers.

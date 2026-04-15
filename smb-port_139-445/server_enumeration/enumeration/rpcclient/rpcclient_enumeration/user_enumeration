@@ -1,0 +1,14 @@
+
+- Users can be listed using: querydispinfo and enumdomusers.
+- Details of a user by: queryuser <0xrid>.
+- Groups of a user with: queryusergroups <0xrid>.
+- A user's SID is retrieved through: lookupnames <username>.
+- Aliases of users by: queryuseraliases [builtin|domain] <sid>.
+
+
+# Users' RIDs-forced
+for i in $(seq 500 1100); do
+    rpcclient -N -U "" [IP_ADDRESS] -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo "";
+done
+
+# samrdump.py can also serve this purpose

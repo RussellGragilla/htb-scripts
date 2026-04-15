@@ -1,0 +1,4 @@
+nmap -sC -sV -p- --open $target -v --> regardless of tools, check 
+what is open you can come back to rustscan or autoscan, but know what 
+is open on the host sometimes you can good readings from this, 
+sometimes, not, but run -v for verbose. You do not need to wait on scans!

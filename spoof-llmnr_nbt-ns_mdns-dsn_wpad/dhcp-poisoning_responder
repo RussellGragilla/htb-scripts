@@ -1,0 +1,13 @@
+DHCP Poisoning with Responder
+
+- Spoofing DHCP responses can permanently poison a victim’s routing information, 
+  offering a stealthier alternative to ARP poisoning.
+
+- It requires precise knowledge of the target network’s configuration.
+
+- Running the attack: 
+  ./Responder.py -I eth0 -Pdv
+
+- This method can effectively capture NTLMv1/2 hashes, but it requires careful handling
+   to avoid network disruption.
+

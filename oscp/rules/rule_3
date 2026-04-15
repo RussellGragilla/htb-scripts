@@ -1,0 +1,7 @@
+After whatweb, dirsearch, it comes with a prelist, and it works 
+like gobuster. This just saves on time. However, everyone is 
+different. A tool is a tool. 
+But for me, running this:
+dirsearch -u http://$target
+You'll get what you need even while nmap is running.
+other word lists works

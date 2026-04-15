@@ -1,0 +1,18 @@
+Multicast DNS (mDNS) enables DNS-like name resolution and service discovery inside a local link without a unicast DNS server. 
+It uses UDP/5353 and the multicast addresses 224.0.0.251 (IPv4) and FF02::FB (IPv6). DNS Service Discovery (DNS-SD, typically used with mDNS) 
+provides a standardized way to enumerate and describe services via PTR, SRV and TXT records.
+
+PORT     STATE SERVICE
+5353/udp open  zeroconf
+Key protocol details you’ll often leverage during attacks:
+
+Names in the .local zone are resolved via mDNS.
+QU (Query Unicast) bit may request unicast replies even for multicast questions.
+Implementations should ignore packets not sourced from the local link; some stacks still accept them.
+Probing/announcing enforces unique host/service names; interfering here creates DoS/“name squatting” conditions.
+
+
+DNS-SD service model
+Services are identified as _._tcp or _._udp under .local, e.g. _ipp._tcp.local (printers), _airplay._tcp.local (AirPlay), 
+_adb._tcp.local (Android Debug Bridge), etc. Discover types with _services._dns-sd._udp.local, then resolve 
+discovered instances to SRV/TXT/A/AAAA.

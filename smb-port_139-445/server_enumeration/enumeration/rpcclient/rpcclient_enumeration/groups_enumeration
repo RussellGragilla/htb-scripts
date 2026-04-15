@@ -1,0 +1,4 @@
+
+- Groups by: enumdomgroups.
+- Details of a group with: querygroup <0xrid>.
+- Members of a group through: querygroupmem <0xrid>.

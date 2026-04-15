@@ -1,0 +1,7 @@
+
+You can authenticate to kerberos using the tools smbclient and 
+rpcclient:
+
+bash
+smbclient --kerberos //ws01win10.domain.com/C$
+rpcclient -k ws01win10.domain.com

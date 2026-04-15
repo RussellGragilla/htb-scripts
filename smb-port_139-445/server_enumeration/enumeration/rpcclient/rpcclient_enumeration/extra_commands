@@ -1,0 +1,16 @@
+Command	                    Interface	                                        Description
+================================================================================================================
+queryuser	                SAMR	                                            Retrieve user information
+querygroup	                Retrieve group information	
+querydominfo	            Retrieve domain information	
+enumdomusers	            Enumerate domain users	
+enumdomgroups	            Enumerate domain groups	
+createdomuser	            Create a domain user	
+deletedomuser	            Delete a domain user	
+lookupnames	                LSARPC	                                            Look up usernames to SIDa values
+lookupsids	                Look up SIDs to usernames (RIDb cycling)	
+lsaaddacctrights	        Add rights to a user account	
+lsaremoveacctrights	        Remove rights from a user account	
+dsroledominfo	            LSARPC-DS	                                        Get primary domain information
+dsenumdomtrusts	            Enumerate trusted domains within an AD forest
+==================================================================================================================

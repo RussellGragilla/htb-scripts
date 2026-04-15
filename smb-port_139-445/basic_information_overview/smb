@@ -1,0 +1,15 @@
+The Server Message Block (SMB) protocol, operating in a client-server model, is designed 
+for regulating access to files, directories, and other network resources like printers 
+and routers. Primarily utilized within the Windows operating system series, SMB ensures 
+backward compatibility, allowing devices with newer versions of Microsoft’s operating 
+system to seamlessly interact with those running older versions. Additionally, the 
+Samba project offers a free software solution, enabling SMB’s implementation on 
+Linux and Unix systems, thereby facilitating cross-platform communication through SMB.
+
+Shares, representing arbitrary parts of the local file system, can be provided by an 
+SMB server, making the hierarchy visible to a client partly independent from the 
+server’s actual structure. The Access Control Lists (ACLs), which define access rights, 
+allow for fine-grained control over user permissions, including attributes like 
+execute, read, and full access. These permissions can be assigned to individual users 
+or groups, based on the shares, and are distinct from the local permissions 
+set on the server.

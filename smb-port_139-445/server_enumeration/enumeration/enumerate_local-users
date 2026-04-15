@@ -1,0 +1,12 @@
+# Impacket
+lookupsid.py -no-pass hostname.local
+
+# Oneliner
+for i in $(seq 500 1100);do rpcclient -N -U "" 10.10.10.10 -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo "";done
+
+# Metasploit
+use auxiliary/scanner/smb/smb_lookupsid
+set rhosts hostname.local
+run
+
+

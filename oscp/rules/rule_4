@@ -1,0 +1,7 @@
+Use netcat to banner grab your network ports! 
+nc -nnv $target <port>
+if you see port 21 first before port 80, then check port 21. 
+if nmap is done, try this as well
+nmap -sV -A -p <port> $target --script=banner
+also don't be afraid to use telnet
+telnet $target <port> -- for email, 25, you'll be doing a lot

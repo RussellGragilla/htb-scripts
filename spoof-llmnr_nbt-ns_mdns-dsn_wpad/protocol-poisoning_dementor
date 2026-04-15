@@ -1,0 +1,23 @@
+Dementro
+
+- Dementor expands on the topics of multicast poisoning and additionally acts 
+  as a rogue service provider (including CUPS RCE support)
+
+- Overall structure is similar to Responder with more granular configuration. 
+  (default is here: Dementor.toml)
+
+
+Running Dementor
+
+- With detault settings applied: 
+  Dementor -I <interface>
+
+- With default settings in analysis mode: 
+  Dementor -I <interface> -A
+
+- Automatic NTLM session downgrade (ESS): 
+  Dementor -I <interface> -O NTLM.ExtendedSessionSecurity=Off
+
+- Run current session with custom config: 
+  Dementor -I <interface> --config <file.toml>
+

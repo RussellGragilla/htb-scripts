@@ -1,0 +1,9 @@
+crackmapexec smb 10.10.10.10 --users [-u <username> -p <password>]
+crackmapexec smb 10.10.10.10 --groups [-u <username> -p <password>]
+crackmapexec smb 10.10.10.10 --groups --loggedon-users [-u <username> -p <password>]
+
+ldapsearch -x -b "DC=DOMAIN_NAME,DC=LOCAL" -s sub "(&(objectclass=user))" -h 10.10.10.10 | grep -i samaccountname: | cut -f 2 -d " "
+
+rpcclient -U "" -N 10.10.10.10
+enumdomusers
+enumdomgroups

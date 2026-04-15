@@ -1,0 +1,4 @@
+
+- SIDs by name using: lookupnames <username>.
+- More SIDs through: lsaenumsid.
+- RID cycling to check more SIDs is performed by: lookupsids <sid>.

@@ -1,0 +1,14 @@
+Assume you have anonymous/guest access for ports like 445/139, 21, 135
+if you don't have it, check it off, that's not the way in
+if you do, get everything from 21 and 445 from the share folder
+also run this:
+nmap -v -p 139,445 --script smb-os-discovery $target -v 
+banner grab this 
+RPC:
+rpcclient -U “” -N $target
+enumdomusers
+srvinfo
+querdispinfo
+
+dump the users first if you can, if not banner grab, and come 
+back with a user however, its the only way to get in

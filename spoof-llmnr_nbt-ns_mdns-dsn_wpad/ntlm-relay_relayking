@@ -1,0 +1,30 @@
+RelayKing – relayable target discovery and curated relay lists
+RelayKing is an NTLM relay exposure auditor that maps where relays are viable and produces ready-to-use
+ target lists for ntlmrelayx.py -tf. It checks protocol hardening (SMB signing/channel binding; HTTP/HTTPS/MSSQL/LDAP/LDAPS EPA/CBT;
+  RPC auth) and flags coercion/reflection helpers (PetitPotam/PrinterBug/DFSCoerce, WebClient/WebDAV, NTLMv1, CVE-2025-33073 reflection).
+
+Auth improves reliability for HTTPS/LDAPS CBT and MSSQL EPA checks; SMB signing/signature level is probed unauthenticated.
+
+Cross-protocol relay pathing leverages confirmed Net-NTLMv1 (--ntlmv1/--ntlmv1-all) findings; severity ranking is provided per path.
+
+--gen-relay-list <file> 
+  writes a grep-friendly target list for ntlmrelayx.py -tf <file> to avoid trial-and-error.
+
+--coerce-all mass-triggers PetitPotam/DFSCoerce/PrinterBug against all targets; --ntlmv1-all (RemoteRegistry) and --audit (domain-wide LDAP host pull)
+ are noisy and generate many logons/remote accesses.
+
+--proto-portscan 
+  speeds scanning by skipping closed ports; 
+--krb-dc-only h
+  elps when DCs block NTLM but other services still accept it.
+
+Example sweeps:
+
+# Authenticated audit across multiple protocols + generate relay list for ntlmrelayx
+
+python3 relayking.py -u lowpriv -p 'P@ssw0rd!' -d lab.local --dc-ip 10.0.0.10 \
+  --audit --protocols smb,ldap,ldaps,mssql,http,https --proto-portscan --ntlmv1 \
+  --threads 10 -vv -o plaintext,json --output-file relayking-scan --gen-relay-list relaytargets.txt
+
+# Unauthenticated CIDR sweep for SMB/LDAP/HTTP relayability
+python3 relayking.py --null-auth --protocols smb,ldap,http --proto-portscan -o plaintext 10.10.0.0/24

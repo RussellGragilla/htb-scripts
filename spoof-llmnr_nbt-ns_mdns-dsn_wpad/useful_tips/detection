@@ -1,0 +1,9 @@
+Detection
+
+Surge in Event 4769 for CIFS/, HTTP/, LDAP/ from the same 
+source within seconds.
+Event 4649 on the service indicates replay detected.
+Kerberos logon from 127.0.0.1 (relay to local SCM) is highly 
+suspicious—map via Sigma rule in KrbRelayUp docs.
+Watch changes to msDS-AllowedToActOnBehalfOfOtherIdentity or 
+msDS-KeyCredentialLink attributes.

@@ -1,0 +1,18 @@
+Tooling quick reference
+
+- nmap NSE: dns-service-discovery and broadcast-dns-service-discovery.
+- Pholus: active scan, reverse mDNS sweeps, DoS and spoofing helpers.
+
+# Passive sniff (timeout seconds)
+sudo python3 pholus3.py <iface> -stimeout 60
+
+# Enumerate service types
+sudo python3 pholus3.py <iface> -sscan
+
+# Send generic mDNS requests
+sudo python3 pholus3.py <iface> --request
+
+# Reverse mDNS sweep of a subnet
+sudo python3 pholus3.py <iface> -rdns_scanning 192.168.2.0/24
+
+- bettercap zerogod: discover, save, advertise, and impersonate mDNS/DNS-SD services (see examples above).

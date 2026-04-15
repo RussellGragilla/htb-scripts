@@ -1,0 +1,5 @@
+banner grab 25 with nc -nv $target 25
+run VRFY root - if exist, cool, if not, there may be a user
+test the connection as well
+telnet aslo works
+telnet $target 25

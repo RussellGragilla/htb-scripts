@@ -1,0 +1,11 @@
+Local Host Resolution Protocols
+
+- LLMNR, NBT-NS, and mDNS:
+    * Microsoft and other operating systems use LLMNR and NBT-NS for local name resolution when DNS fails.
+      Similarly, Apple and Linux systems use mDNS.
+
+    * These protocols are susceptible to interception and spoofing due to their 
+      unauthenticated, broadcast nature over UDP.
+
+    * Responder and Dementor can be used to impersonate services by sending 
+      forged responses to hosts querying these protocols.

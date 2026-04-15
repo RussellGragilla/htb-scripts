@@ -1,0 +1,4 @@
+
+- All available shares by: netshareenumall.
+- Information about a specific share is fetched with: 
+  netsharegetinfo <share>.

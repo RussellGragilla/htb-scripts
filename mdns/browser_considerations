@@ -1,0 +1,8 @@
+Browser/WebRTC mDNS considerations
+
+Modern Chromium/Firefox obfuscate host candidates with random mDNS names. You can re-expose LAN IPs on managed endpoints 
+by pushing the Chrome policy WebRtcLocalIpsAllowedUrls (or toggling chrome://flags/#enable-webrtc-hide-local-ips-with-mdns/Edge equivalent) 
+so ICE exposes host candidates instead of mDNS; set via HKLM\Software\Policies\Google\Chrome.
+
+When users disable the protection manually (common in WebRTC troubleshooting guides), their browsers start advertising 
+plain host candidates again, which you can capture via mDNS or ICE signaling to speed up host discovery.

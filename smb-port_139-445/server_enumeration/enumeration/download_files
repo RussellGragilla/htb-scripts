@@ -1,0 +1,17 @@
+# Search a file and download
+sudo smbmap -R Folder -H <IP> -A <FileName> -q # Search the file in recursive mode and download it inside /usr/share/smbmap
+
+# Download all
+smbclient //<IP>/<share>
+> mask ""
+> recurse
+> prompt
+> mget *
+# Download everything to current directory
+Commands:
+
+- mask: specifies the mask which is used to filter the files within the directory 
+  (e.g. “” for all files)
+- recurse: toggles recursion on (default: off)
+- prompt: toggles prompting for filenames off (default: on)
+- mget: copies all files matching the mask from host to client machine

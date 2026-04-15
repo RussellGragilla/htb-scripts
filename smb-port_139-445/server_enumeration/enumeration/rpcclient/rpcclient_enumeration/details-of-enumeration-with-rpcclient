@@ -1,0 +1,9 @@
+The rpcclient utility from Samba is utilized for interacting 
+with RPC endpoints through named pipes. Below commands that 
+can be issued to the SAMR, LSARPC, and LSARPC-DS interfaces 
+after a SMB session is established, 
+often necessitating credentials.
+
+Server Information
+
+- To obtain Server Information: srvinfo command is used.

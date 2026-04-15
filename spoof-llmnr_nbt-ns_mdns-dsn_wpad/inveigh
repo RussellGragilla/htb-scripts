@@ -1,0 +1,13 @@
+
+- Inveigh is a tool for penetration testers and red teamers, designed for Windows systems. 
+- It offers functionalities similar to Responder, performing spoofing and man-in-the-middle attacks. 
+- The tool has evolved from a PowerShell script to a C# binary, with Inveigh and InveighZero as the main versions. 
+- Detailed parameters and instructions can be found in the wiki.
+
+- Inveigh can be operated through PowerShell:
+
+Invoke-Inveigh -NBNS Y -ConsoleOutput Y -FileOutput Y
+
+- Or executed as a C# binary:
+
+Inveigh.exe

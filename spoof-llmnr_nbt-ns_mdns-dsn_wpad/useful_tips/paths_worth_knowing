@@ -1,0 +1,19 @@
+
+#Vector                       Trick                    Why it matters
+
+                          Fake server sends a        Works even across
+AuthIP/                GSS-ID payload with any       subnets; machine 
+IPSec                   SPN; client builds an        creds by default
+                       AP-REQ straight to you
+
+DCOM/                  Malicious OXID resolver           Pure local
+MSRPC                  forces client to auth to           priv-sec;
+                       arbitray SPN and port         sidesteps firewall
+
+AD CS                  Relay machine ticket to          Bypasses LDAP 
+Web Enroll             HTTP/CA and get a cert,        signing defenses
+                       then PKINIT to mint TGTs 
+
+Shadow              Write msDN-KeyCretendtialLink,      No need to add
+Credentials                then PKINIT with               a computer
+                           forged key pair                  account

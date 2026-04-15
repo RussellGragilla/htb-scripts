@@ -1,0 +1,13 @@
+
+# Error                        Meaning                           Fix
+
+KRB_AP_ERR_MODIFIED	    Ticket key ≠ target key           Wrong host/SPN
+
+KRB_AP_ERR_SKEW     	Clock > 5 min offset	            Sync time or
+                                                              use w32tm
+
+LDAP bind fails	          Signing enforced	             Use AD CS path
+                                                      or disable signing
+
+Event 4649 spam	       Service saw duplicate             block or race 
+                           Authenticator	            original packet

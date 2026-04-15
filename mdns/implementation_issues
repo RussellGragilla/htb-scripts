@@ -1,0 +1,10 @@
+Notes on recent implementation issues (useful for DoS/persistence during engagements)
+
+- Avahi reachable-assertion and D-Bus crash bugs (2023) can terminate avahi-daemon on Linux distributions (e.g. CVE-2023-38469..38473, CVE-2023-1981), 
+  disrupting service discovery on target hosts until restart.
+- Cisco IOS XE Wireless LAN Controller mDNS gateway DoS (CVE-2024-20303) lets adjacent WLAN clients flood crafted mDNS, 
+  spiking WLC CPU and dropping AP tunnels—handy if you need to force client roaming or controller resets during an engagement.
+- Apple mDNSResponder logic error DoS (CVE-2024-44183) lets a sandboxed local process crash Bonjour to briefly suppress 
+  service publication/lookup on Apple endpoints; patched in current iOS/macOS releases.
+- Apple mDNSResponder correctness issue (CVE-2025-31222) allowed local privilege escalation via mDNSResponder; useful for persistence
+  on unmanaged Macs/iPhones, fixed in recent iOS/macOS updates.

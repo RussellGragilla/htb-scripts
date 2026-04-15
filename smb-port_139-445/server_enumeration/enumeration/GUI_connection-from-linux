@@ -1,0 +1,5 @@
+# In the terminal:
+xdg-open smb://cascade.htb/
+
+# In file browser window (nautilus, thunar, etc)
+smb://friendzone.htb/general/

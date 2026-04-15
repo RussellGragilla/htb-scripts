@@ -1,0 +1,8 @@
+When it comes to web enumeration, while nmap is running, you do 
+not need to go onthe website! Run whatweb first!
+whatweb $target or whatweb $target:port
+Wapplzer is great, but this saves on time, and your still 
+in the terminal. 
+Banner grab with this tool. (subjective, some people are 
+different though, 
+I like whatweb since I stay in the console)

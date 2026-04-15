@@ -1,0 +1,5 @@
+
+- Alias groups by: enumalsgroups <builtin|domain>.
+
+- Members of an alias group with: queryaliasmem 
+  builtin|domain <0xrid>.

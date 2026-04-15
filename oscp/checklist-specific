@@ -1,0 +1,127 @@
+==================================================================
+Initial Recon & Access:
+==================================================================
+- Scan all TCP ports.
+- Enumerate web server with all your relevant wordlists.
+- Do proper fingerprinting with -sV -sC,  nmap vuln scan, 
+  wappalyzer, whatweb, check CMS, check server headers, 
+  nc -nvv, check every TCP port etc.
+- Check for public exploits on exploitDB and google.
+- Rescan if you're stuck, verify tools are working properly and 
+  you're running them properly.
+- Check UDP ports.
+
+
+==================================================================
+Web Enumeration:
+==================================================================
+- Enumerate web server with all relevant wordlists 
+  (dirsearch/gobuster).
+- Try multiple extensions: .php, .asp, .html, .txt, .bak.
+- Identify tech using Wappalyzer, whatweb, webanalyze.
+- Check for CMS (WordPress, Drupal, Joomla, etc.).
+- Enumerate plugins/themes if CMS exists.
+- Check robots.txt, sitemap.xml, changelog, readme, backup files.
+- Inspect JavaScript sources for hidden paths.
+- Look at default credentials lists for known web apps 
+  (safe research).
+- Identify login panels, admin areas, upload features, 
+  API endpoints.
+- Screenshot each interesting page.
+- Check all response headers.
+- Check verbose error messages or debug traces if present.
+- Inspect API responses for hidden fields or metadata.
+- Look for stack traces, server paths, or framework leaks.
+- Check cookies for session type, flags, structure.
+- Search for version numbers exposed in HTML comments.
+
+
+=================================================================
+Service Enumeration:
+=================================================================
+- For every open port: check banner, version, and basic 
+  functionality.
+- Run nmap -sV -sC default scripts for initial coverage.
+- Run nmap vuln scan (safe script categories only). Manually 
+  check banners with nc -nvv, telnet, curl, etc.
+- Enumerate SMB shares (anonymous? listable?).
+- Enumerate FTP (anonymous login? directory listing?).
+- Enumerate SSH (banner, version, OS hints).
+- Enumerate email services if present (POP3, IMAP, SMTP).
+- Check for RPC, RDP, VNC, redis, memcached.
+- Try safe SNMP enumeration if port 161 is open.
+- Check for printers, cameras, or other unusual services.
+- Perform version research for each exposed service.
+
+
+=================================================================
+Host:
+=================================================================
+- Identify login portals (SSH, RDP, Web UI).
+- Enumerate potential username patterns from
+
+
+=================================================================
+File:
+=================================================================
+- Enumerate directories thoroughly (deep wordlist passes).
+- Switch wordlists: small → medium → large → extensions → forced 
+  browsing.
+- Look for:
+    Configuration files
+    Export logs
+    SQL dumps
+    Archive files
+    Admin tools
+    Hidden directories
+- Explore every link, button, and form manually.
+
+
+=================================================================
+Low hanging fruit:
+=================================================================
+- Look for outdated CMS/framework versions.
+- Look for anonymous/guest access on services.
+- Look for open file shares with readable configs.
+- Look for exposed backups (zip, tar, old files).
+- Try safe upload test (file type + size constraints).
+- Browse old endpoints (deprecated routes).
+- Check for default admin pages.
+- Check for password reuse indicators (username hints, comments).
+- Check for open databases that accept connections but require 
+  no creds.
+- Look for world‑readable directories or misconfigured shares.
+
+
+=================================================================
+Rescanning:
+=================================================================
+- Rescan if stuck—enumeration accuracy matters.
+- Adjust Nmap timing (T2/T3 vs T4/T5 as appropriate).
+- Try different scanners or wordlists.
+- Validate that:
+    You used root/admin privileges where needed
+    Tools aren’t firewalled or timing out
+    Your VPN/connection is stable
+- Re-run targeted scans on “weird” ports.
+- Check for changes after interacting with services.
+
+
+=================================================================
+Mental OSCP Rules:
+=================================================================
+- Don’t jump machines randomly—finish full enumeration first.
+- Document EVERYTHING, especially oddities.
+- If stuck: redo your recon, expand your enumeration, and stay 
+  systematic.
+- Remember: Enumeration → Enumeration → Enumeration.
+- Identify the machine’s likely role (dev box, file server, 
+  CMS host).
+- Infer the privilege model (is there a backend DB? AD? internal 
+  API?).
+- Build a list of:
+    Potential misconfigurations
+    Weak authentication points
+    Development artifacts
+    Exposed internal logic
+- Prioritize targets based on simplicity and feasibility.

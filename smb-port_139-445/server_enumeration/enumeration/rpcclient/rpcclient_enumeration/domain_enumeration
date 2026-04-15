@@ -1,0 +1,4 @@
+
+- Domains using: enumdomains.
+- A domain's SID is retrieved through: lsaquery.
+- Domain information is obtained by: querydominfo.

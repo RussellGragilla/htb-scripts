@@ -1,0 +1,25 @@
+Defensive considerations and OPSEC
+
+- Segment boundaries: Don’t route 224.0.0.251/FF02::FB between security zones unless an mDNS gateway is
+  explicitly required. If you must bridge discovery, prefer allowlists and rate limits.
+
+- Windows endpoints/servers:
+    *To hard-disable name resolution via mDNS set the registry value and reboot:
+
+     HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters\EnableMDNS = 0 (DWORD)
+
+    *In managed environments, disable the built-in “mDNS (UDP-In)” Windows Defender Firewall rule
+     (at least on the Domain profile) to prevent inbound mDNS processing while preserving home/roaming functionality.
+    *On newer Windows 11 builds/GPO templates, use the policy “Computer Configuration > Administrative Templates > 
+     Network > DNS Client > Configure multicast DNS (mDNS) protocol” and set it to Disabled.
+
+- Linux (Avahi):
+    *Lock down publishing when not needed: set disable-publishing=yes, and restrict interfaces 
+     with allow-interfaces= / deny-interfaces= in /etc/avahi/avahi-daemon.conf.
+    *Consider check-response-ttl=yes and avoid enable-reflector=yes unless strictly required; 
+     prefer reflect-filters= allowlists when reflecting.
+
+- macOS: Restrict inbound mDNS at host/network firewalls when Bonjour discovery is not needed for specific subnets.
+
+- Monitoring: Alert on unusual surges in _services._dns-sd._udp.local queries or sudden changes in SRV/TXT 
+  of critical services; these are indicators of spoofing or service impersonation.

@@ -1,0 +1,40 @@
+nmap -Pn -sC -sV -p- --open -T4 $target -v  -oN nmap_TCPscan.txt
+
+Rustscan:
+https://github.com/bee-san/RustScan/wiki/Installation-Guide
+rustscan -a 10.0.x.x/24 --ulimit 5000 -- -Pn 
+rustscan -a $target --ulimit 5000 --A -sV 
+rustscan -a $target --ulimit 5000
+
+openssl s_client -connect $target:443
+
+banner grab:
+
+nc $target port
+nc -zv $target <port> -manual enumeration
+nc -nv $target <port>
+
+curl -I http://$target
+curl -kI http://$target
+
+whatweb http://$target
+
+Unicornscans is also a great tool 
+sudo apt install unicornscan 
+unicornscan -v -I -i <interface> -mT <target_IP_address_or_range>
+Note: most likely use tun0
+
+curl -I http://$target
+curl -kI http://$target
+curl -i http://$target/ -use and find the path of the search
+
+add this as well when stuck
+sudo echo “target ip domain.local" >> /etc/hosts
+nmap -p 21 --script ftp-anon,ftp-syst,ftp-bounce $target
+nmap -p 25 --script smtp-enum-users --script-args smtp-enum-users.methods={VRFY,EXPN} $target
+nmap -p 23 --script=telnet-brute,telnet-ntlm-info $target
+nmap -p 22 -sV --script=ssh2-enum-alogs,ssh-hostkey $target
+enum4linux-ng $target -- for 445/139 and 135
+
+rpcclient -U “” -N $target
+nmap -p 3389 --script=rdp-enum-encryption $target -- check rdp

